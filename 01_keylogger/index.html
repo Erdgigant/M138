@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Log</h1>
+
+  <div id="log"></div>
+
+  <script>
+    var log = '';
+    document.addEventListener('keydown', function(e){
+      var pressedKey = String.fromCharCode(e.keyCode || e.which);
+      log += pressedKey;
+      document.getElementById('log').innerText = log;
+    });
+  </script>
+</body>
+</html>

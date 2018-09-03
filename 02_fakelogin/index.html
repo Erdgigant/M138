@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <form class="passwordForm">Normales Formular </form>
+
+  <template id="loginform">
+    <form>
+      <input type="text" property="username" />
+      <input type="password" property="password" />
+    </form>
+  </template>
+
+  <script>
+  (function(){
+      var logintemplate = document.getElementById('loginform');
+      var forms = document.getElementsByTagName("form");
+
+      for(var i = 0, fLength = forms.length; fLength > i; i++){
+        forms[i].innerHTML = logintemplate.innerHTML;
+      }
+    })();
+  </script>
+</body>
+</html>

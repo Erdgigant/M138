@@ -1,0 +1,14 @@
+{
+    "name": "roman/03_2fa_otp_mail",
+    "require": {
+        "mailgun/mailgun-php": "^2.6",
+        "php-http/curl-client": "^1.7",
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/message": "^1.7"
+    },
+    "authors": [
+        {
+            "name": "Roman"
+        }
+    ]
+}

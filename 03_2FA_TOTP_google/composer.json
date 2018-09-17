@@ -1,0 +1,12 @@
+{
+    "name": "roman/03_2FA_TOTP_google",
+    "require": {
+        "phpgangsta/googleauthenticator": "dev-master"
+    },
+    "minimum-stability":"dev",
+    "authors": [
+        {
+            "name": "Roman"
+        }
+    ]
+}

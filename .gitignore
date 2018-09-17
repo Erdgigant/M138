@@ -2,3 +2,6 @@
 /03_2FA_OTP_MAIL/vendor/
 /03_2FA_OTP_MAIL/composer.lock
 /03_2FA_OTP_MAIL/settings.php
+/03_2FA_TOTP_google/temp.txt
+/03_2FA_TOTP_google/composer.lock
+/03_2FA_TOTP_google/vendor/

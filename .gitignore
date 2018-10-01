@@ -5,3 +5,6 @@
 /03_2FA_TOTP_google/temp.txt
 /03_2FA_TOTP_google/composer.lock
 /03_2FA_TOTP_google/vendor/
+/04_single_sign_on/vendor/
+/04_single_sign_on/credentials.json
+/04_single_sign_on/composer.lock

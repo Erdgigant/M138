@@ -1,0 +1,11 @@
+{
+    "name": "roman/04_single_sign_on",
+    "require": {
+        "league/oauth2-google": "^2.2"
+    },
+    "authors": [
+        {
+            "name": "Roman"
+        }
+    ]
+}

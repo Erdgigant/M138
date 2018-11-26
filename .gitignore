@@ -8,3 +8,6 @@
 /04_single_sign_on/vendor/
 /04_single_sign_on/credentials.json
 /04_single_sign_on/composer.lock
+/10_injection_and_friends/composer.lock
+/10_injection_and_friends/vendor/
+/10_injection_and_friends/settings.php

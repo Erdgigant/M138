@@ -1,0 +1,11 @@
+{
+    "name": "roman/10_injection_and_friends",
+    "require": {
+        "typo3fluid/fluid": "^2.5"
+    },
+    "authors": [
+        {
+            "name": "Roman Schilter"
+        }
+    ]
+}

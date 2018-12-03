@@ -53,6 +53,18 @@ class Controller
         return $view;
     }
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return void
+     */
+    protected function renderView($name, $arguments = [])
+    {
+        $view = $this->initializeView($name);
+        $view->assignMultiple($arguments);
+        echo $view->render();
+    }
+
     // ACTIONS
 
     /**
@@ -63,11 +75,22 @@ class Controller
      */
     public function __call($name, $arguments)
     {
-        echo $this->initializeView($this->action)->render();
+        $this->renderView($name);
     }
 
     public function login()
     {
-        var_dump($_POST);die();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $db = new Database();
+        if($db->checkLogin($username, $password)){
+            $this->renderView('user', ['username' => $username]);
+        } else {
+            $this->renderView('index', [
+                'message' => 'Could not login',
+                'username' => $username
+            ]);
+        }
     }
 }

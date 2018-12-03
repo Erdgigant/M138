@@ -10,7 +10,7 @@ class Database
 
     public function __construct()
     {
-        require_once '../settings.php';
+        require_once 'settings.php';
         $settings = getSettings();
         $this->connection = new mysqli('localhost', $settings['user'], $settings['password'], $settings['db_name']);
 
@@ -30,12 +30,20 @@ class Database
      * @return bool
      */
     public function checkLogin($username, $password){
-        $this->connection->prepare(
+        /** @var mysqli_stmt $statement */
+        $statement = $this->connection->prepare(
             "SELECT COUNT(*)
             FROM user
-            WHERE username = $username AND $password = $password"
+            WHERE username = ? AND password = ?"
         );
+        $statement->bind_param('ss', $username, $password);
+        $result = $statement->execute();
 
+        if($result){
+            return $statement->get_result()->fetch_row()[0];
+        }
+
+        return false;
     }
 
 }

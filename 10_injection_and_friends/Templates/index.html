@@ -2,10 +2,12 @@
 
 <f:section name="Main">
 
+    <div>{message}</div>
+
     <form action="?action=login" method="POST">
         <div>
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username"/>
+            <input type="text" name="username" id="username" value="{username}"/>
         </div>
         <div>
             <label for="password">Password:</label>

@@ -5,7 +5,9 @@ class Controller
 
     const ACTIONS = [
         'index',
-        'login'
+        'login',
+        'createFeedback',
+        'listFeedback'
     ];
 
     /**
@@ -92,5 +94,27 @@ class Controller
                 'username' => $username
             ]);
         }
+    }
+
+    public function createFeedback()
+    {
+        $title = $_POST['title'];
+        $feedback = $_POST['feedback'];
+
+        $db = new Database();
+        if($db->createFeedback($title, $feedback)){
+            $this->renderView('user', ['message' => 'Feedback sent']);
+        } else {
+            $this->renderView('user', ['message' => 'Feedback could not be sent']);
+        }
+    }
+
+    public function listFeedback()
+    {
+        $db = new Database();
+
+        $this->renderView('listFeedback', [
+           'feedback' => $db->getAllFeedback()
+        ]);
     }
 }

@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors',1);
 
-// should be random and regenerated every time
+// should be random and regenerated every time, but is hardcoded for presentation
 const CSRF_TOKEN = 'afhjfh32ur8euir8efzhcdshftbwe';
 
 $action = ($_POST['action'] ?? 'index') . 'Action';

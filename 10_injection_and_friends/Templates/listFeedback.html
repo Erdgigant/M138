@@ -1,0 +1,15 @@
+<f:layout name="Default" />
+
+<f:section name="Main">
+
+    <h3>Feedback list:</h3>
+    
+    <f:comment>XSS protection wird von Fluid übernommen</f:comment>
+    <f:for each="{feedback}" as="singleFeedback" >
+        <div>
+            {singleFeedback.title}: {singleFeedback.feedback}
+        </div>
+    </f:for>
+
+
+</f:section>

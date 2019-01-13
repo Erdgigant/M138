@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Cyphertext: <input type="text" id="cyphertext" title="cyphertext"/>
+Key: <input type="text" id="key" title="key" />
+
+Plaintext: <span id="plaintext"></span>
+
+<script>
+    var plaintextField = document.getElementById('plaintext');
+    var cyphertextField = document.getElementById('cyphertext');
+    var keyField = document.getElementById('key');
+
+    var cipherHandler = function () {
+        plaintextField.innerHTML = vigenere(cyphertextField.value, keyField.value)
+    };
+
+    var vigenere = function(input, key) {
+        key = filterKey(key);
+        var output = "";
+        for (var i = 0, j = 0; i < input.length; i++) {
+            var c = input.charCodeAt(i);
+            if (isUppercase(c)) {
+                output += String.fromCharCode((c - 65 + key[j % key.length]) % 26 + 65);
+                j++;
+            } else if (isLowercase(c)) {
+                output += String.fromCharCode((c - 97 + key[j % key.length]) % 26 + 97);
+                j++;
+            } else {
+                output += input.charAt(i);
+            }
+        }
+        return output;
+    };
+
+    var filterKey = function(key) {
+        var result = [];
+        for (var i = 0; i < key.length; i++) {
+            var c = key.charCodeAt(i);
+            if (isLetter(c)) {
+                var x = (c - 65) % 32;
+                result.push((26 - x) % 26);
+            }
+        }
+        return result;
+    };
+
+    var isLetter = function(c) {
+        return isUppercase(c) || isLowercase(c);
+    };
+
+    var isUppercase = function(c) {
+        return 65 <= c && c <= 90;
+    };
+
+    var isLowercase = function(c) {
+        return 97 <= c && c <= 122;
+    };
+
+    cyphertextField.addEventListener('change', cipherHandler);
+    keyField.addEventListener('change', cipherHandler);
+</script>
+</body>
+</html>

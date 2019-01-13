@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Plaintext: <input type="text" id="plaintext" title="plaintext"/>
+Cyphertext: <input type="text" id="cyphertext" title="cyphertext"/>
+
+Shift: <input type="number" id="shift" title="shift" value="0"/>
+
+<script>
+    var plaintextField = document.getElementById('plaintext');
+    var cyphertextField = document.getElementById('cyphertext');
+    var shiftField = document.getElementById('shift');
+
+    var cipherHandler = function (e) {
+        // keep both fields clean
+        plaintextField.value = plaintextField.value.replace(/[^a-zA-Z]/g, '').toLowerCase();
+        cyphertextField.value = cyphertextField.value.replace(/[^a-zA-Z]/g, '').toLowerCase();
+
+        if(e.target.id === 'cyphertext'){
+            plaintextField.value = cesar(cyphertextField.value, -shiftField.value);
+        } else {
+            cyphertextField.value = cesar(plaintextField.value, +shiftField.value);
+        }
+    };
+
+    var cesar = function(string, shift) {
+        var result = '';
+        var charcode = 0;
+
+        for (var i = 0; i < string.length; i++) {
+            // get charcode from 1 - 26 meaning 1 => a etc
+            charcode = string.charCodeAt(i) - 97;
+            // shift it and don't let it over 26
+            charcode = (charcode + shift) % 26;
+            // handle negative charcodes
+            if(charcode < 0){
+                charcode = 26 + charcode;
+            }
+            // convert back to actual charcode
+            result += String.fromCharCode(charcode + 97);
+        }
+        return result;
+    };
+
+    plaintextField.addEventListener('change', cipherHandler);
+    cyphertextField.addEventListener('change', cipherHandler);
+    shiftField.addEventListener('change', cipherHandler);
+</script>
+</body>
+</html>

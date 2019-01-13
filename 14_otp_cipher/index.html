@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+Plaintext: <input type="text" id="plaintext" title="plaintext"/>
+Cyphertext: <input type="text" id="cyphertext" title="cyphertext"/>
+
+Key: <input type="text" id="key" title="key"/>
+
+<script>
+    var A = 65;
+    var Z = 90;
+    var CHARSET	= 26;
+
+    var plaintextField = document.getElementById('plaintext');
+    var cyphertextField = document.getElementById('cyphertext');
+    var keyField = document.getElementById('key');
+
+    var cipherHandler = function (e) {
+        // keep both fields clean
+        plaintextField.value = plaintextField.value.toUpperCase().replace(/[^a-z]+/gi, '');
+
+        if(keyField.value.length < 1){
+            keyField.value = generateKey(plaintextField.value);
+        }
+
+        var result = '', tempMessage, tempKey, temp;
+
+        if(e.target.id === 'cyphertext'){
+            for(var d = 0; d < cyphertextField.value.length; d++){
+                tempMessage	= cyphertextField.value.charCodeAt(d);
+                tempKey	= keyField.value.charCodeAt(d);
+                temp = tempMessage + tempKey - (A - 1);
+
+                if(temp > Z)
+                    temp	-= CHARSET;
+
+                result += String.fromCharCode(temp);
+            }
+
+            plaintextField.value = formatText(result);
+            cyphertextField.value = formatText(cyphertextField.value);
+        } else {
+            for(var i = 0; i < plaintextField.value.length; i++) {
+                tempMessage	 = plaintextField.value.charCodeAt(i);
+                tempKey	= keyField.value.charCodeAt(i);
+                temp = tempMessage - tempKey + (A - 1);
+
+                if(temp < A)
+                    temp	+= CHARSET;
+
+                result += String.fromCharCode(temp);
+            }
+
+            plaintextField.value = formatText(plaintextField.value);
+            cyphertextField.value = formatText(result);
+        }
+    };
+
+    var formatText = function(text){
+        var tmp	= '';
+
+        for(var i = 0; i < text.length; i++){
+            tmp += text[i];
+
+            if(i % 5 === 4)
+                tmp += ' ';
+        }
+
+        return tmp;
+    };
+
+    var generateKey = function(text){
+        var key = '';
+
+        for(var i = 0; i < text.length; i++)
+            key	+= String.fromCharCode(Math.floor(Math.random() * CHARSET) + A);
+
+        return key;
+    };
+
+    plaintextField.addEventListener('change', cipherHandler);
+    cyphertextField.addEventListener('change', cipherHandler);
+    keyField.addEventListener('change', cipherHandler);
+</script>
+</body>
+</html>
